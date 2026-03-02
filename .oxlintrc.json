@@ -3,7 +3,25 @@
   "plugins": null,
   "categories": {},
   "rules": {
-    "eslint/no-undef": "error"
+    // 禁止 CJS API
+    "eslint/no-restricted-globals": [
+      "error",
+      "__dirname",
+      "__filename",
+      "require",
+      "module",
+      "exports"
+    ],
+    "eslint/no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          "fs",
+          "path",
+          "http"
+        ]
+      }
+    ]
   },
   "settings": {
     "jsx-a11y": {
@@ -34,10 +52,9 @@
       "typecheck": false
     }
   },
-  "env": {
-    "builtin": true,
-    "node": true
-  },
-  "globals": {},
-  "ignorePatterns": ["node_modules", "**/node_modules/**"]
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "**/node_modules/**"
+  ]
 }
