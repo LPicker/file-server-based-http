@@ -13,7 +13,7 @@ export interface FileEntry {
 export class Directory {
   rootPath: string;
 
-  constructor(dirPath: string) {
+  constructor(dirPath = ".") {
     this.rootPath = path.resolve(__dirname, dirPath);
   }
 

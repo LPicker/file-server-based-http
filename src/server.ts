@@ -2,15 +2,13 @@ import * as http from "node:http";
 import { Directory, type FileEntry } from "./directory.js";
 import { getMimeType } from "./utils/file.js";
 
-export interface FileEntryWithPath extends FileEntry {}
-
-export class Server {
+export default class Server {
   port: number;
   directory: Directory;
 
-  constructor(port: number) {
+  constructor(port: number, dir = ".") {
     this.port = port;
-    this.directory = new Directory(".");
+    this.directory = new Directory(dir);
   }
 
   start(): void {
@@ -38,14 +36,14 @@ export class Server {
           res.end("Not Found");
         } else {
           // Content-Type 应该对应请求文件的 mimetype
-          res.writeHead(200, { "Content-Type": getMimeType(req.url) });
+          res.writeHead(200, { "Content-Type": getMimeType(req.url) + "; charset=utf-8" });
           res.end(result);
         }
       }
     }
   }
 
-  getFileItemView(file: FileEntryWithPath): string {
+  getFileItemView(file: FileEntry): string {
     return `
       <li class="${file.isDirectory ? "folder" : ""}">
         <a href="./${file.name}${file.isDirectory ? "/" : ""}">${file.name}${file.isDirectory ? "/" : ""}</a>
@@ -61,5 +59,3 @@ export class Server {
     `;
   }
 }
-
-new Server(3000).start();

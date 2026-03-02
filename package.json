@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/server.js",
-    "dev": "nodemon --exec tsm src/server.ts",
+    "dev": "nodemon --exec tsm src/index.ts",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
