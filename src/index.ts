@@ -1,3 +1,7 @@
 import Server from "./server.js";
 
-const server = new Server(8080, process.cwd()).start();
+const port = 8080;
+
+const server = new Server(port, process.cwd()).start();
+
+console.log(`Server running at http://localhost:${port}/`);
